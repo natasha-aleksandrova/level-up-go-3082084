@@ -12,7 +12,8 @@ type User struct {
 	Country string `json:"country"`
 }
 
-const path = "users.json"
+const path = "01_06b/users.json"
+
 
 // getBiggestMarket takes in the slice of users and
 // returns the biggest market.

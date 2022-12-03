@@ -9,7 +9,9 @@ import (
 	"time"
 )
 
-const path = "friends.json"
+var Visited = make(map[string]bool)
+
+const path = "01_08b/friends.json"
 
 // Friend represents a friend and their connections.
 type Friend struct {
@@ -40,9 +42,18 @@ func (f *Friends) getRandomFriend() Friend {
 	return f.getFriend(fmt.Sprint(id))
 }
 
-// spreadGossip ensures that all the friends in the map have heard the news
+// spreadGossip ensures that all the friends
+// in the map have heard the news
 func spreadGossip(root Friend, friends Friends) {
-	panic("NOT IMPLEMENTED")
+	Visited[root.ID] = true
+	for _, friendId := range friends.getFriend(root.ID).Friends {
+		nextFriend := friends.getFriend(friendId)
+		if _, isVisited := Visited[friendId]; isVisited {
+			continue
+		}
+		nextFriend.hearGossip()
+		spreadGossip(nextFriend, friends)
+	}
 }
 
 func main() {

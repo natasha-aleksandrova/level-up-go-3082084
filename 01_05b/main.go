@@ -5,9 +5,10 @@ import (
 	"flag"
 	"log"
 	"os"
+	"sort"
 )
 
-const path = "items.json"
+const path = "01_05b/items.json"
 
 // SaleItem represents the item part of the big sale.
 type SaleItem struct {
@@ -20,7 +21,17 @@ type SaleItem struct {
 // matchSales adds the sales procentage of the item
 // and sorts the array accordingly.
 func matchSales(budget float64, items []SaleItem) []SaleItem {
-	panic("NOT IMPLEMENTED")
+	var result []SaleItem
+	for _, item := range items {
+		item.SalePercentage = (item.ReducedPrice / item.OriginalPrice)*100
+		if item.ReducedPrice <= budget {
+			result = append(result, item)
+		}
+	}
+	sort.Slice(result, func(i, j int) bool {
+  	return result[i].SalePercentage > result[j].SalePercentage
+	})
+	return result
 }
 
 func main() {
@@ -39,7 +50,7 @@ func printItems(items []SaleItem) {
 		log.Println("No items found.:( Try increasing your budget.")
 	}
 	for i, r := range items {
-		log.Printf("[%d]:%s is %.2f OFF! Get it now for JUST %.2f!\n", 
+		log.Printf("[%d]:%s is %.2f percent OFF! Get it now for JUST %.2f!\n", 
 		i, r.Name, r.SalePercentage, r.ReducedPrice)
 	}
 }

@@ -4,6 +4,7 @@ import (
 	"flag"
 	"log"
 	"time"
+	"fmt"
 )
 
 var expectedFormat = "2006-01-02"
@@ -11,6 +12,7 @@ var expectedFormat = "2006-01-02"
 // parseTime validates and parses a given date string.
 func parseTime(target string) time.Time {
 	pt, err := time.Parse(expectedFormat, target)
+	fmt.Println(time.Now().After(pt))
 	if err != nil || time.Now().After(pt) {
 		log.Fatal("invalid target date: ", target)
 	}

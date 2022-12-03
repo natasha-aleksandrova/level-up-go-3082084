@@ -8,7 +8,7 @@ import (
 	"sort"
 )
 
-const path = "items.json"
+const path = "01_05e/items.json"
 
 // SaleItem represents the item part of the big sale.
 type SaleItem struct {

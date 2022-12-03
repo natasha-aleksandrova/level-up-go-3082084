@@ -6,9 +6,10 @@ import (
 	"log"
 	"os"
 	"text/tabwriter"
+	"sort"
 )
 
-const path = "songs.json"
+const path = "01_09b/songs.json"
 
 // Song stores all the song related information
 type Song struct {
@@ -19,7 +20,17 @@ type Song struct {
 
 // makePlaylist makes the merged sorted list of songs
 func makePlaylist(albums [][]Song) []Song {
-	panic("NOT IMPLEMENTED")
+	var mergedSongs []Song
+	for _, album := range albums {
+		for _, song := range album {
+			mergedSongs = append(mergedSongs, song)
+		}
+	}
+	sort.Slice(mergedSongs, 
+		func(i, j int) bool { 
+				return mergedSongs[i].PlayCount > mergedSongs[j].PlayCount 
+		})
+	return mergedSongs
 }
 
 func main() {

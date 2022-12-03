@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"math"
 	"os"
 )
 
@@ -12,12 +13,24 @@ type User struct {
 	Country string `json:"country"`
 }
 
-const path = "users.json"
+const path = "01_06b/users.json"
 
 // getBiggestMarket takes in the slice of users and
 // returns the biggest market.
 func getBiggestMarket(users []User) (string, int) {
-	panic("NOT IMPLEMENTED")
+	var countryCnt = make(map[string]int)
+	var maxCountry string
+	var maxCount int = int(math.Inf(-1))
+	for _, user := range users {
+		countryCnt[user.Country]++
+	}
+	for k, v := range countryCnt {
+		if v > maxCount{
+			maxCount = v
+			maxCountry = k
+		}
+	}
+	return maxCountry, maxCount
 }
 
 func main() {

@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const path = "friends.json"
+const path = "01_08b/friends.json"
 
 // Friend represents a friend and their connections.
 type Friend struct {

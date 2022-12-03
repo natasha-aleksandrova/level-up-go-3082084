@@ -9,7 +9,7 @@ import (
 	"text/tabwriter"
 )
 
-const path = "songs.json"
+const path = "01_09e/songs.json"
 
 // Song stores all the song related information
 type Song struct {
